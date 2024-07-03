@@ -1,4 +1,4 @@
-import { WelcomeScreenContainer } from "@/components/home";
+import { WelcomeScreenContainer } from "@/components/custom/home";
 
 export default function Home() {
   return (

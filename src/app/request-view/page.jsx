@@ -1,4 +1,4 @@
-import { RequestViewContainer } from '@/components/requesttable'
+import { RequestViewContainer } from '@/components/custom/requesttable'
 import React from 'react'
 
 const Page = () => {
