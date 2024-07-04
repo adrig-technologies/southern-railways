@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-import moment from "moment";
+
 import '@/app/GanttChart.css';
 
 const GanttChart = ({ tasks }) => {
@@ -92,6 +92,8 @@ const GanttChart = ({ tasks }) => {
     return colors[teamId % colors.length];
   };
 
+  // console.log(groupedTasks[1][0].teamTasks)
+
   return (
     <div className="gantt-chart">
       <div className="tasks-container">
@@ -110,7 +112,7 @@ const GanttChart = ({ tasks }) => {
             <div className="team-timeline">
               {teamTasks.map((task) => (
                 <div key={task.id} className="task-row">
-                  <div className="h-10"></div>
+                  <div className="h-10 text-sm text-slate-400 px-10">{task.id}</div>
                   <div className="task-timeline">
                     <div
                       className={`task ${conflictingTasks.includes(task.id) ? 'conflict' : ''}`}

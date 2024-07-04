@@ -13,10 +13,10 @@ const Page = async () => {
       try {
         const res = await axios.get('http://localhost:4000/createBlockRequest');
         machinesData = (res.data.data.machines);
-        sectionData = (res.data.data.stations);
-        stationsData = (res.data.data.sections);
+        sectionData = (res.data.data.sections);
+        stationsData = (res.data.data.stations);
        slotData = (res.data.data.slot);
-      } catch (error) {
+      } catch (_) {
 
       }
   

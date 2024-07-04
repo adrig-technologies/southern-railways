@@ -93,21 +93,6 @@ const CorridorContainer = () => {
     };
   };
 
-  const generateChartData = (tasks) => {
-    if (!Array.isArray(tasks) || tasks.length === 0) {
-      return [];
-    }
-
-    const dataTable = [
-    ];
-
-    tasks.forEach((task) => {
-      dataTable.push([task.name, task.id, task.start, task.end]);
-    });
-
-    return dataTable;
-  };
-
   const handleBlockChange = (e) => {
     setSelectedBlock(e.target.value);
   };

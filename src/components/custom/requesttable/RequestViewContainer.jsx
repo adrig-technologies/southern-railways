@@ -3,27 +3,33 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import GanttChart from "../GanttChart";
+import { formatDate } from '@/lib/utils';
 import moment from "moment";
 import Image from 'next/image';
 import Loader from '../Loader';
 import { RequestTimeline } from "@/assets";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const RequestViewContainer = () => {
   const [sectionData, setSectionData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const [isOptimizing, setIsOptimizing] = useState(false);
   
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true)
       try {
         const res = await axios.post("http://localhost:4000/getRequests",{
-          startDate: moment().subtract(1, "years"),
-          endDate:new Date().toISOString(),
+          startDate: moment().subtract(10, "years"),
+          endDate:new Date('2025-07-07').toISOString(),
         });
+        console.log(res.data)
         setSectionData(res.data.map(block=>{
           return {
-            id:block.Req_ID,
-            team:block.Station.Station,
+            id:block.Station.Station,
+            team:formatDate(block.startTime),
             name:block.Req_ID,
             start:moment(block.startTime).format("HH:mm"),
             end:moment(block.endTime).format("HH:mm")
@@ -39,6 +45,13 @@ const RequestViewContainer = () => {
     fetchData();
   }, []);
 
+  const optimizeTimelineHandler = () => {
+    setIsOptimizing(true);
+    setTimeout(() => {
+      router.push('/optimize-timeline')
+      setIsOptimizing(false);
+    }, 4000)
+  }
 
   return (
     <div className="w-4/5 min-h-screen flex flex-col space-y-8 p-24 items-center mx-auto">
@@ -54,6 +67,7 @@ const RequestViewContainer = () => {
       ) : (
         <GanttChart tasks={sectionData}/>
       )}
+      {!isLoading && <Button onClick={optimizeTimelineHandler}>Optimize Timeline</Button>}
     </div>
   )
 }

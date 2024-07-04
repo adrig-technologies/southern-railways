@@ -74,9 +74,9 @@ const SidebarMenu = () => {
             <CalendarCog  className="w-4 h-4 mr-2"/>
               <span>Request Table</span>
             </Link>
-            <Link href="/table" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
+            <Link href="/optimize-timeline" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
             <CalendarCheck2 className="w-4 h-4 mr-2"/>
-              <span>Time Table</span>
+              <span>Optimized Table</span>
             </Link>
           </nav>
           </div>
