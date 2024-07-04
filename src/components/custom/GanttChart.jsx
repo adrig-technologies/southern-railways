@@ -148,6 +148,7 @@ const GanttChart = ({ tasks }) => {
                       <div className="task-tooltip" style={showToolTip===task.id ? {visibility:"initial",opacity:1, left: `${calculatePosition(task.start)}%`,
                         }:{}}>
                         <strong>{task.name}</strong><br />
+                        {task.machine && `Machine: ${task.machine}`}<br/>
                         Team: {task.team}<br />
                         Start: {task.start}<br />
                         End: {task.end}

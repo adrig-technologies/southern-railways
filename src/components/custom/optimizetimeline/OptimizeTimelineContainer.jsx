@@ -37,7 +37,7 @@ const OptimizeTimelineContainer = () => {
         const res = await axios.get('http://localhost:4000/getSchedule');
 
         console.log(res.data)
-        const obj = groupByDateWithStationIds (res.data)
+        const obj = groupByDateWithStationIds(res.data)
         const obj2 = {}
         for (const [date, values] of Object.entries(obj)) {
           obj2[date] = values.map(block => {
@@ -45,6 +45,7 @@ const OptimizeTimelineContainer = () => {
                       id:block.requestId,
                       team: block.stationId,
                       name:block.requestId,
+                      machine: block.machineId,
                       start:moment().startOf('day').add(block.startTime,"minutes").format("HH:mm"),
                       end:moment().startOf('day').add(block.endTime,"minutes").format("HH:mm")
                     }

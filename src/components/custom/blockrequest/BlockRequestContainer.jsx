@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import axios from 'axios';
 import moment from "moment";
 import Spinner from '../Spinner';
+import { useRouter } from 'next/navigation';
 
 // const blockRequestSchema = z.object({
 //   date: z.date(),
@@ -30,6 +31,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
   const [message, setMessage] = useState("");
   const [corridorTimings, setCorridorTimings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
 
   const formik = useFormik({
     initialValues: {
@@ -64,6 +66,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
         const res = await axios.post("http://localhost:4000/createBlockRequest", formattedData);
         if (res.data.success) {
           setMessage(res.data.msg);
+          router.push('/request-view')
         } else {
           setMessage(res.data);
         }
@@ -149,7 +152,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.worktype && formik.errors.worktype && <p className="mt-2 text-sm text-red-600">{formik.errors.worktype}</p>}
               </div>
               <div>
-              <label className="block mb-1">Section <strong className='text-destructive'>*</strong></label>
+              <label className="text-md ml-2 text-slate-500">Section <strong className='text-destructive'>*</strong></label>
                <select
                   value={formik.values.section}
                   onChange={formik.handleChange}
@@ -167,7 +170,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 )}
               </div>
               <div>
-                <label className="block mb-1">Station Between <strong className='text-destructive'>*</strong></label>
+                <label className="text-md ml-2 text-slate-500">Station Between <strong className='text-destructive'>*</strong></label>
                 <select
                   value={formik.values.station}
                   onChange={formik.handleChange}
@@ -227,7 +230,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.demandto && formik.errors.demandto && <p className="mt-2 text-sm text-red-600">{formik.errors.demandto}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="ohed" className="text-md ml-2 text-slate-500"> OHE Disconnection<strong className='text-destructive'>*</strong></label>
+                <label htmlFor="ohed" className="text-md ml-2 text-slate-500"> OHE Disconnection</label>
                 <select
                   id="ohed"
                   name="ohed"
@@ -242,7 +245,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.ohed && formik.errors.ohed && <p className="mt-2 text-sm text-red-600">{formik.errors.ohed}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="ohedr" className="text-md ml-2 text-slate-500"> OHE Disconnection Remark<strong className='text-destructive'>*</strong></label>
+                <label htmlFor="ohedr" className="text-md ml-2 text-slate-500"> OHE Disconnection Remark</label>
                 <input
                   id="ohedr"
                   name="ohedr"
@@ -256,7 +259,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.ohedr && formik.errors.ohedr && <p className="mt-2 text-sm text-red-600">{formik.errors.ohedr}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="sntd" className="text-md ml-2 text-slate-500"> S&T Disconnection<strong className='text-destructive'>*</strong></label>
+                <label htmlFor="sntd" className="text-md ml-2 text-slate-500"> S&T Disconnection</label>
                 <select
                   id="sntd"
                   name="sntd"
@@ -271,7 +274,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.sntd && formik.errors.sntd && <p className="mt-2 text-sm text-red-600">{formik.errors.sntd}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="sntdr" className="text-md ml-2 text-slate-500"> S&T Disconnection Remark<strong className='text-destructive'>*</strong></label>
+                <label htmlFor="sntdr" className="text-md ml-2 text-slate-500"> S&T Disconnection Remark</label>
                 <input
                   id="sntdr"
                   name="sntdr"
@@ -285,7 +288,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.sntdr && formik.errors.sntdr && <p className="mt-2 text-sm text-red-600">{formik.errors.sntdr}</p>}
               </div>
               <div className="mb-4 col-span-2">
-                <label htmlFor="remark" className="text-md ml-2 text-slate-500"> Remark<strong className='text-destructive'>*</strong></label>
+                <label htmlFor="remark" className="text-md ml-2 text-slate-500"> Remark</label>
                 <textarea
                   id="remark"
                   name="remark"
@@ -314,7 +317,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                {isLoading ? <Spinner /> : <span>Submit</span>}
               </button>
             </div>
-            {message.length > 0 && (<p className="text-center mt-4">{insertionStatus}</p>)}
+            {message.length > 0 && (<p className="text-center mt-4">{message}</p>)}
           </form>
         </div>
       </div>

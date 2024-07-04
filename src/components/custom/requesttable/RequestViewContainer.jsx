@@ -10,13 +10,14 @@ import Loader from '../Loader';
 import { RequestTimeline } from "@/assets";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import Spinner from "../Spinner";
 
 const RequestViewContainer = () => {
   const [sectionData, setSectionData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const [isOptimizing, setIsOptimizing] = useState(false);
-  
+
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true)
@@ -25,16 +26,17 @@ const RequestViewContainer = () => {
           startDate: moment().subtract(10, "years"),
           endDate:new Date('2025-07-07').toISOString(),
         });
-        console.log(res.data)
-        setSectionData(res.data.map(block=>{
-          return {
-            id:block.Station.Station,
-            team:formatDate(block.startTime),
-            name:block.Req_ID,
-            start:moment(block.startTime).format("HH:mm"),
-            end:moment(block.endTime).format("HH:mm")
-          }
-        }));
+          setSectionData(res.data.map(block=>{
+            console.log(block);
+                  return {
+                id:block.Station.Station,
+                team:formatDate(block.startTime),
+                name:block.Req_ID,
+                machine: block.Machine.Machine_ID,
+                start:moment(block.startTime).format("HH:mm"),
+                end:moment(block.endTime).format("HH:mm")
+              }
+            }));
         console.log(res.data)
       } catch (error) {
         console.error(error);
@@ -67,7 +69,7 @@ const RequestViewContainer = () => {
       ) : (
         <GanttChart tasks={sectionData}/>
       )}
-      {!isLoading && <Button onClick={optimizeTimelineHandler}>Optimize Timeline</Button>}
+      {!isLoading && <Button className="w-56" onClick={optimizeTimelineHandler}>{isOptimizing ? <Spinner /> : <span>Optimize Timeline</span> } </Button>}
     </div>
   )
 }
