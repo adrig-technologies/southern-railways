@@ -6,7 +6,7 @@ import { House, Pencil, CirclePlus, CircleUser, Eye, CalendarClock, CalendarChec
 import { Button } from '../ui/button';
 
 const SidebarMenu = () => {
-  const [drawerOpen, setDrawerOpen] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -23,7 +23,7 @@ const SidebarMenu = () => {
   };
 
   return (
-    <section className={`absolute top-6 left-10`}>
+    <section className={`absolute top-6 left-10 z-50`}>
       {
         !drawerOpen ? (
           <span onClick={toggleDrawer} className='cursor-pointer'>
@@ -46,7 +46,7 @@ const SidebarMenu = () => {
             <House className="w-4 h-4 mr-2" />
               <span>Home</span>
             </Link>
-            <Link href="/lineblocks" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
+            <Link href="/block-request" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
             <CirclePlus className="w-4 h-4 mr-2" />
               <span>Create Block Request</span>
             </Link>
@@ -70,7 +70,7 @@ const SidebarMenu = () => {
             <CalendarClock className="w-4 h-4 mr-2" />
               <span>Corridor Table</span>
             </Link>
-            <Link href="/request-table" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
+            <Link href="/request-view" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
             <CalendarCog  className="w-4 h-4 mr-2"/>
               <span>Request Table</span>
             </Link>

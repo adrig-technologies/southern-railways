@@ -1,18 +1,13 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Chart } from 'react-google-charts';
 import axios from 'axios';
 import { formatDate } from '@/lib/utils';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 import Image from 'next/image';
 import { CorridorTimeline } from '@/assets';
 import Loader from '../Loader';
+import GanttChart from '../GanttChart';
+import moment from "moment";
 
 const CorridorContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,9 +26,23 @@ const CorridorContainer = () => {
           block: selectedBlock,
         });
 
+        const obj = {}
+        debugger;
+      for (const [date, values] of Object.entries(res.data)) {
+        obj[date] = values.map(block => {
+                  return {
+                    id:block.station_id,
+                    team:block.Station.Station,
+                    name:block.station_id,
+                    start:moment(block.start_time).format("HH:mm"),
+                    end:moment(block.end_time).format("HH:mm")
+                  }
+           })
+        }
+
         if (res && res.data) {
           const formattedData = formatResponseData(res.data);
-          setSectionData(formattedData.sectionData);
+          setSectionData(obj);
           setStartDateBound(formattedData.startDateBound);
           setEndDateBound(formattedData.endDateBound);
           console.log('formattedData:', formattedData);
@@ -90,12 +99,6 @@ const CorridorContainer = () => {
     }
 
     const dataTable = [
-      [
-        { type: 'string', id: 'Station' },
-        { type: 'string', id: 'Task ID' },
-        { type: 'date', id: 'Start Date' },
-        { type: 'date', id: 'End Date' },
-      ],
     ];
 
     tasks.forEach((task) => {
@@ -117,7 +120,7 @@ const CorridorContainer = () => {
         <div className='w-14 h-14 flex items-center justify-center bg-slate-100 rounded-full shadow-md'><Image src={CorridorTimeline} alt='Corridor Timeline' className='w-full h-full ml-1' /></div>
         <h1 className="text-2xl font-bold font-sans text-slate-800">Corridor Timeline</h1>
       </div>
-      <p className='w-full text-center text-md font-sans text-slate-600'>The Corridor Timetable provides a detailed schedule of activities and events occurring within the corridor. It ensures everyone is informed about meetings, collaborative sessions and maintenance.</p>
+      <p className='w-full text-center text-md font-sans text-slate-600'>The Corridor block timetable provides a detailed schedule of free time between every station inside a section to understand when maintenance between every station can be held, and this visualisation contains the corridor block of the next 7 days alone.</p>
       {/* <div className="">
         <select
           value={selectedBlock}
@@ -138,33 +141,14 @@ const CorridorContainer = () => {
             </div>
         ) : (
           <div className='w-full'>
-            <Accordion type="multiple" collapsible className="w-full">
+            <div className="w-full flex flex-col space-y-24">
             {Object.entries(sectionData).map(([date, tasks], index) => (
-              <AccordionItem key={index} value={date}>
-              <AccordionTrigger className="text-slate-700 text-md underline-offset-2 hover:bg-slate-50 px-2 rounded-md">{`${formatDate(date)}`}</AccordionTrigger>
-              <AccordionContent className="p-2">
-              <Chart
-                chartType="Timeline"
-                options={{
-                  timeline: { showRowLabels: true, showBarLabels: false },
-                  hAxis: {
-                    minValue: startDateBound,
-                    maxValue: endDateBound,
-                    slantedText: false,
-                    format: 'HH:mm:ss',
-                    title: 'Time of Day',
-                    titleTextStyle: { italic: false },
-                  },
-                  tooltip: { isHtml: true },
-                }}
-                data={generateChartData(tasks)}
-                width="fit"
-                height="250px"
-              />
-              </AccordionContent>
-            </AccordionItem>
+              <section key={index} className='flex flex-col space-y-4'>
+              <span className="text-slate-700 text-xl font-semibold font-sans underline-offset-2 px-2 rounded-md">{`${formatDate(date)}:`}</span>
+              <GanttChart tasks={tasks}/>
+              </section>
           ))}
-    </Accordion>
+    </div>
         </div>
         )
       }

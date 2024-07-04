@@ -1,9 +1,13 @@
-import CorridorTimeline from './images/CorridorTimeline.png'
-import OptimizedTimeline from './images/OptimizedTimeline.png'
-import RequestTimeline from './images/RequestTimeline.png'
+import CorridorTimeline from '@/assets/images/CorridorTimeline.png'
+import OptimizedTimeline from '@/assets/images/OptimizedTimeline.png'
+import RequestTimeline from '@/assets/images/RequestTimeline.png'
+
+import NoActivity from '@/assets/animations/no-activity.json'
 
 export {
     CorridorTimeline,
     OptimizedTimeline,
-    RequestTimeline
+    RequestTimeline,
+
+    NoActivity
 }

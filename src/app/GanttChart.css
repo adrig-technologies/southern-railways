@@ -1,0 +1,355 @@
+:root {
+  --md-sys-color-primary: #6750A4;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #EADDFF;
+  --md-sys-color-on-primary-container: #21005D;
+  --md-sys-color-secondary: #625B71;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #E8DEF8;
+  --md-sys-color-on-secondary-container: #1D192B;
+  --md-sys-color-surface: #FFFBFE;
+  --md-sys-color-on-surface: #1C1B1F;
+  --md-sys-color-surface-variant: #E7E0EC;
+  --md-sys-color-on-surface-variant: #49454F;
+  --md-sys-color-outline: #79747E;
+  --md-sys-color-error: #B3261E;
+}
+
+.gantt-chart {
+  width: 100%;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--md-sys-color-surface);
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15),
+              0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+  margin: 16px 0;
+}
+
+.time-slots {
+  margin-left: 150px;
+  display: flex;
+  height: 48px;
+  background-color: var(--md-sys-color-surface-variant);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.time-slot {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  padding: 12px 4px;
+  color: var(--md-sys-color-on-surface-variant);
+  border-right: 1px solid var(--md-sys-color-outline);
+  position: relative;
+}
+
+/* .time-slot::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  height: 1000px;
+  width: 1px;
+  background-color: var(--md-sys-color-outline);
+  opacity: 0.2;
+} */
+
+.tasks-container {
+  padding: 8px 0;
+}
+
+.team-group {
+  margin-bottom: 24px;
+  background-color: var(--md-sys-color-surface);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.team-label {
+  padding: 16px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-secondary-container);
+  background-color: var(--md-sys-color-secondary-container);
+}
+
+.team-timeline {
+  position: relative;
+  padding: 8px 0;
+}
+
+.task-row {
+  display: flex;
+}
+
+.task-row:nth-child(odd) {
+  background-color: var(--md-sys-color-surface-variant);
+}
+
+.task-label {
+  width: 150px;
+  padding: 8px 16px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+}
+
+.task-timeline {
+  flex-grow: 1;
+  position: relative;
+}
+
+.task {
+  position: absolute;
+  height: 100%;
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--md-sys-color-on-primary);
+  background-color: var(--md-sys-color-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.9;
+  transition: opacity 0.3s, box-shadow 0.3s;
+  z-index: 2;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  opacity: 0;
+  font-weight: 600;
+  animation: grow 1s forwards;
+}
+.task .icon{
+  display: flex;
+  font-size: small;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: #00000052;
+  height: calc(100% + 8px);
+  padding: 0px 12px;
+  margin-left: -12px;
+}
+.task .text{
+  flex-grow: 1;
+  margin-left: 8px;
+}
+.task:hover {
+  opacity: 1;
+  box-shadow:  0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+}
+
+.task.conflict {
+  background-color: var(--md-sys-color-error);
+}
+
+.conflict-area {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: var(--md-sys-color-error);
+  opacity: 0.2;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.task-tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 3;
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.task:hover .task-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/**
+ * Grow from left to right smooth animation without content delay
+ */
+@keyframes grow {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) scale(50%);
+    overflow: hidden;
+    width: 0px;
+  }
+  100% {
+    opacity: 1;
+    width: calc(auto + 0px);
+  }
+}
+
+/* .gantt-chart {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.time-slots {
+  display: flex;
+  height: 30px;
+  background-color: #f0f0f0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.time-slot {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px 0;
+  border-right: 1px solid #ccc;
+}
+
+.tasks-container {
+  position: relative;
+}
+
+.team-group {
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.team-label {
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.team-timeline {
+  position: relative;
+}
+
+.task-row {
+  display: flex;
+  height: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.task-label {
+  width: 150px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-right: 1px solid #ccc;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.task-timeline {
+  flex-grow: 1;
+  position: relative;
+}
+
+.task {
+  position: absolute;
+  height: 30px;
+  top: 5px;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+
+.task:hover {
+  opacity: 1;
+}
+
+.task.conflict {
+  box-shadow: 0 0 0 2px #FF5722;
+}
+
+.task-time {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conflict-area {
+  position: absolute;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.task {
+  position: absolute;
+  height: 30px;
+  top: 5px;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  z-index: 2;
+  cursor: pointer; 
+}
+
+.task:hover {
+  opacity: 1;
+}
+
+.task-tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 3;
+  pointer-events: none; 
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.task:hover .task-tooltip {
+  visibility: visible;
+  opacity: 1;
+} */
