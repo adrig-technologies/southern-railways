@@ -50,9 +50,9 @@ const SidebarMenu = () => {
             <CirclePlus className="w-4 h-4 mr-2" />
               <span>Create Block Request</span>
             </Link>
-            <Link href="/edit-requests" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
+            <Link href="/requests" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
             <Pencil className="w-4 h-4 mr-2" />
-              <span>Edit Block</span>
+              <span>Requests</span>
             </Link>
             <Link href="/suggested" className="flex items-center px-4 py-2 text-slate-400 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
             <CircleUser className="w-4 h-4 mr-2"/>

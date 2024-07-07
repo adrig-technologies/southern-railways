@@ -11,6 +11,7 @@ import { RequestTimeline } from "@/assets";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import Spinner from "../Spinner";
+import HeaderContent from "../HeaderContent";
 
 const RequestViewContainer = () => {
   const [sectionData, setSectionData] = useState([]);
@@ -57,11 +58,7 @@ const RequestViewContainer = () => {
 
   return (
     <div className="w-4/5 min-h-screen flex flex-col space-y-8 p-24 items-center mx-auto">
-      <div className="w-full flex justify-center items-center space-x-4">
-        <div className='w-14 h-14 flex items-center justify-center bg-slate-100 rounded-full shadow-md'><Image src={RequestTimeline} alt='Request Timeline' className='w-full h-full ml-1' /></div>
-        <h1 className="text-2xl font-bold font-sans text-slate-800">Request Timeline</h1>
-      </div>
-      <p className='w-full text-center text-md font-sans text-slate-600'>The Corridor block timetable provides a detailed schedule of free time between every station inside a section to understand when maintenance between every station can be held, and this visualisation contains the corridor block of the next 7 days alone.</p>
+      <HeaderContent title='Request Timeline' description='The request block timeline consists of all the requests raised by the all the users and visualise them into a timeline chart and if the request timings overlap on one another, it has a red overlay on top of the request blocks.' img={RequestTimeline} />
       {isLoading ? (
         <div className='w-full flex-1 h-full flex items-center justify-center text-xl font-semibold text-slate-800'>
         <Loader />

@@ -7,7 +7,8 @@ import Loader from '../Loader';
 import { formatDate } from '@/lib/utils';
 import Image from 'next/image';
 import moment from "moment";
-import GanttChart from '../GanttChart';
+import GanttChart1 from '../GanttChart1';
+import HeaderContent from '../HeaderContent';
 
 const OptimizeTimelineContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -67,11 +68,7 @@ const OptimizeTimelineContainer = () => {
 
   return (
     <div className="w-4/5 min-h-screen flex flex-col space-y-8 p-24 items-center mx-auto">
-    <div className="w-full flex justify-center items-center space-x-4">
-      <div className='w-14 h-14 flex items-center justify-center bg-slate-100 rounded-full shadow-md'><Image src={OptimizedTimeline} alt='Optimize Timeline' className='w-full h-full ml-1 mt-1' /></div>
-      <h1 className="text-2xl font-bold font-sans text-slate-800">Optimize Timeline</h1>
-    </div>
-    <p className='w-full text-center text-md font-sans text-slate-600'>This optimization of the request are done by multiple scheduling algorithms and we have ensured to make the best use of the time and provide with extra free time for the railways to operate it other services on the days where there is no maintenance.</p>
+    <HeaderContent title='Optimized Timeline' description='This optimization of the request are done by multiple scheduling algorithms and we have ensured to make the best use of the time and provide with extra free time for the railways to operate it other services on the days where there is no maintenance.' img={OptimizedTimeline} />
     {
       isLoading ? (
         <div className='w-full flex-1 h-full flex items-center justify-center text-xl font-semibold text-slate-800'>
@@ -83,7 +80,7 @@ const OptimizeTimelineContainer = () => {
           {Object.entries(sectionData).map(([date, tasks], index) => (
             <section key={index} className='flex flex-col space-y-4'>
             <span className="text-slate-700 text-xl font-semibold font-sans underline-offset-2 px-2 rounded-md">{`${formatDate(date)}:`}</span>
-            <GanttChart tasks={tasks}/>
+            <GanttChart1 tasks={tasks}/>
             </section>
          ))}
   </div>

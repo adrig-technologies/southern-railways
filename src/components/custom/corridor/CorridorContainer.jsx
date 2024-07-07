@@ -1,54 +1,49 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { formatDate } from '@/lib/utils';
-import Image from 'next/image';
-import { CorridorTimeline } from '@/assets';
-import Loader from '../Loader';
-import GanttChart from '../GanttChart';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { formatDate } from "@/lib/utils";
+import { CorridorTimeline } from "@/assets";
+import Loader from "../Loader";
+import GanttChart from "../GanttChart";
 import moment from "moment";
+import HeaderContent from "../HeaderContent";
 
 const CorridorContainer = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [sectionData, setSectionData] = useState({});
-  const [startDateBound, setStartDateBound] = useState(null);
-  const [endDateBound, setEndDateBound] = useState(null);
-  const [selectedBlock, setSelectedBlock] = useState('AJJ-RU');
+  const [selectedBlock, setSelectedBlock] = useState("AJJ-RU");
   const date = new Date();
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const res = await axios.post('http://localhost:4000/getcorridorblock', {
+        const res = await axios.post("http://localhost:4000/getcorridorblock", {
           date: date,
           block: selectedBlock,
         });
 
-        const obj = {}
+        const obj = {};
         debugger;
-      for (const [date, values] of Object.entries(res.data)) {
-        obj[date] = values.map(block => {
-                  return {
-                    id:block.station_id,
-                    team:block.Station.Station,
-                    name:block.station_id,
-                    start:moment(block.start_time).format("HH:mm"),
-                    end:moment(block.end_time).format("HH:mm")
-                  }
-           })
+        for (const [date, values] of Object.entries(res.data)) {
+          obj[date] = values.map((block) => {
+            return {
+              id: block.station_id,
+              team: block.Station.Station,
+              name: block.station_id,
+              start: moment(block.start_time).format("HH:mm"),
+              end: moment(block.end_time).format("HH:mm"),
+            };
+          });
         }
 
         if (res && res.data) {
           const formattedData = formatResponseData(res.data);
           setSectionData(obj);
-          setStartDateBound(formattedData.startDateBound);
-          setEndDateBound(formattedData.endDateBound);
-          console.log('formattedData:', formattedData);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -97,15 +92,14 @@ const CorridorContainer = () => {
     setSelectedBlock(e.target.value);
   };
 
-  const blockOptions = ['AJJ-RU', 'Another-Block', 'More-Blocks']; // Example options, replace with actual block options
+  const blockOptions = ["AJJ-RU", "Another-Block", "More-Blocks"]; // Example options, replace with actual block options
 
   return (
     <div className="w-4/5 min-h-screen flex flex-col space-y-8 p-24 items-center mx-auto">
-      <div className="w-full flex justify-center items-center space-x-4">
-        <div className='w-14 h-14 flex items-center justify-center bg-slate-100 rounded-full shadow-md'><Image src={CorridorTimeline} alt='Corridor Timeline' className='w-full h-full ml-1' /></div>
-        <h1 className="text-2xl font-bold font-sans text-slate-800">Corridor Timeline</h1>
-      </div>
-      <p className='w-full text-center text-md font-sans text-slate-600'>The Corridor block timetable provides a detailed schedule of free time between every station inside a section to understand when maintenance between every station can be held, and this visualisation contains the corridor block of the next 7 days alone.</p>
+      <HeaderContent title='Corridor Timeline' description='The Corridor block timetable provides a detailed schedule of free time
+        between every station inside a section to understand when maintenance
+        between every station can be held, and this visualization contains the
+        corridor block of the next 7 days alone.' img={CorridorTimeline} />
       {/* <div className="">
         <select
           value={selectedBlock}
@@ -119,24 +113,24 @@ const CorridorContainer = () => {
           ))}
         </select>
       </div> */}
-      {
-        isLoading ? (
-          <div className='w-full flex-1 h-full flex items-center justify-center text-xl font-semibold text-slate-800'>
-            <Loader />
-            </div>
-        ) : (
-          <div className='w-full'>
-            <div className="w-full flex flex-col space-y-24">
-            {Object.entries(sectionData).map(([date, tasks], index) => (
-              <section key={index} className='flex flex-col space-y-4'>
-              <span className="text-slate-700 text-xl font-semibold font-sans underline-offset-2 px-2 rounded-md">{`${formatDate(date)}:`}</span>
-              <GanttChart tasks={tasks}/>
-              </section>
-          ))}
-    </div>
+      {isLoading ? (
+        <div className="w-full flex-1 h-full flex items-center justify-center text-xl font-semibold text-slate-800">
+          <Loader />
         </div>
-        )
-      }
+      ) : (
+        <div className="w-full">
+          <div className="w-full flex flex-col space-y-24">
+            {Object.entries(sectionData).map(([date, tasks], index) => (
+              <section key={index} className="flex flex-col space-y-4">
+                <span className="text-slate-700 text-xl font-semibold font-sans underline-offset-2 px-2 rounded-md">{`${formatDate(
+                  date
+                )}:`}</span>
+                <GanttChart tasks={tasks} />
+              </section>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
