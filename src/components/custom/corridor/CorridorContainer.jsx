@@ -43,7 +43,6 @@ const CorridorContainer = () => {
           setSectionData(obj);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
       }

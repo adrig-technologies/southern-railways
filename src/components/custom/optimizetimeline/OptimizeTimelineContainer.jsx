@@ -37,7 +37,6 @@ const OptimizeTimelineContainer = () => {
       try {
         const res = await axios.get('http://localhost:4000/getSchedule');
 
-        console.log(res.data)
         const obj = groupByDateWithStationIds(res.data)
         const obj2 = {}
         for (const [date, values] of Object.entries(obj)) {
@@ -52,12 +51,10 @@ const OptimizeTimelineContainer = () => {
                     }
              })
           }
-          console.log(obj2)
         if (res && res.data) {
           setSectionData(obj2);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
       } finally {
         setIsLoading(false);
       }

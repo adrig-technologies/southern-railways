@@ -25,11 +25,11 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "var(--primary)",
-          foreground: "hsl(var(--primary-foreground))",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -49,6 +49,21 @@ module.exports = {
         },
         pantone: {
           DEFAULT: "var(--pantone)",
+        },
+        textcolor: {
+          DEFAULT: "var(--text-color)",
+        },
+        primarygreen: {
+          DEFAULT: "var(--primary-green)",
+        },
+        cardbg: {
+          DEFAULT: "var(--card-bg)",
+        },
+        cardbghover: {
+          DEFAULT: "var(--card-bg-hover)",
+        },
+        cardbgselect: {
+          DEFAULT: "var(--card-bg-select)",
         },
         card: {
           DEFAULT: "hsl(var(--card))",

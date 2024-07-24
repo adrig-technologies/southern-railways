@@ -28,7 +28,6 @@ const RequestViewContainer = () => {
           endDate:new Date('2025-07-07').toISOString(),
         });
           setSectionData(res.data.map(block=>{
-            console.log(block);
                   return {
                 id:block.Station.Station,
                 team:formatDate(block.startTime),
@@ -38,9 +37,7 @@ const RequestViewContainer = () => {
                 end:moment(block.endTime).format("HH:mm")
               }
             }));
-        console.log(res.data)
       } catch (error) {
-        console.error(error);
       } finally {
         setIsLoading(false)
       }

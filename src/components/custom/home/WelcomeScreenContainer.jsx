@@ -5,7 +5,8 @@ import Link from "next/link";
 import Lottie from "lottie-react";
 import { NoActivity } from "@/assets";
 import { Chart } from "react-google-charts";
-import { Mic, CircleCheck, CircleDashed, Send, Activity } from "lucide-react";
+import { Mic, CircleCheck, CircleDashed, Send, Activity, CircleUserRound, MoveRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const getFormattedDate = () => {
   const date = new Date();
@@ -87,7 +88,6 @@ const generateDummyData = () => {
 
 const WelcomeScreenContainer = () => {
   const data = generateDummyData();
-  console.log(data);
 
   const options = {
     title: "Requests Over Time",
@@ -97,22 +97,50 @@ const WelcomeScreenContainer = () => {
     colors: ["#1e3a8a", "#22c55e", "#ef233c", "#f97316"], // Use appropriate colors
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="text-center flex flex-col">
-        <span className="text-md mb-4 text-slate-500 font-sans font-medium">
-          {getFormattedDate()}
-        </span>
-        <h1 className="text-3xl font-bold mb-4 text-slate-950">
-          Welcome, Dinesh Kumar 🎉
-        </h1>
-        <p className="text-md text-slate-800 mb-4">
-          Manage your block requests efficiently and effectively.
-        </p>
-      </div>
+    <div className="flex min-h-screen flex-col items-center w-full space-y-6">
+      <section className="bg-secondary w-full rounded-xl flex flex-col items-start space-y-4 p-6">
+        <div className="w-full flex items-start justify-between">
+        <div className="text-center flex flex-col items-start">
+          <span className="text-md mb-4 text-slate-500 font-sans font-medium">
+            {getFormattedDate()}
+          </span>
+          <h1 className="text-3xl font-bold mb-4 text-slate-950">
+            Welcome, Admin 🎉
+          </h1>
+          <p className="text-md text-textcolor mb-4">
+            Manage your block requests efficiently and effectively.
+          </p>
+        </div>
+        <Button className="bg-secondary-foreground text-textcolor flex items-center space-x-4 p-4 font-semibold rounded-full">
+        <CircleUserRound />
+        <span>Admin</span>
+        </Button>
+        </div>
+        <div className="p-4 w-1/2 bg-primary rounded-xl text-textcolor shadow-md col-span-1 flex flex-col items-center justify-between space-y-2">
+          <h2 className="text-xl font-bold mb-4 w-full text-start">
+            Quick Actions
+          </h2>
+          <Activity className="w-10 h-10 animate-pulse" />
+          <div className="w-full flex justify-between pt-2">
+            <Link
+              href="/block-request"
+              className="bg-white text-sm text-center font-semibold px-6 py-2 flex items-center rounded-full w-1/2 mr-2"
+            >
+              <MoveRight /> <span className="flex-1 text-center">Create Block Request</span>
+            </Link>
+            <Link
+              href="/view-requests"
+              className="bg-white text-sm text-center font-semibold px-6 py-2 flex items-center rounded-full w-1/2"
+            >
+              <MoveRight /> <span className="flex-1 text-center">View Requests</span>
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full">
-        <div className="p-6 bg-white border-t rounded-lg shadow-md col-span-2">
-          <h2 className="text-xl text-slate-400 mb-4">Total Request Made</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full bg-secondary p-6 rounded-xl">
+        <div className="p-6 bg-primary border-t rounded-xl shadow-md col-span-2">
+          <h2 className="text-xl text-textcolor mb-4">Total Request Made</h2>
           <span className="text-5xl font-bold">4,650</span>
           <div className="py-6">
             <Chart
@@ -126,8 +154,8 @@ const WelcomeScreenContainer = () => {
         </div>
 
         <div className="flex flex-col h-full col-span-1 justify-start space-y-8">
-          <div className="p-4 bg-slate-50 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4 font-sans text-slate-800">
+          <div className="p-4 bg-primary rounded-xl shadow-md">
+            <h2 className="text-xl font-semibold mb-4 font-sans text-textcolor">
               Recent Activities
             </h2>
             <div className="w-full flex flex-col items-center">
@@ -136,17 +164,17 @@ const WelcomeScreenContainer = () => {
                 loop={true}
                 className="w-36 h-36"
               />
-              <p className="text-sm font-medium text-slate-400">
+              <p className="text-sm font-medium text-textcolor">
                 No recent activities to display.
               </p>
             </div>
           </div>
 
-          <div className="p-4 bg-white rounded-lg shadow-md border-t">
-            <h2 className="text-xl font-semibold mb-4 font-sans text-slate-800">
+          <div className="p-4 bg-white rounded-xl shadow-md border-t">
+            <h2 className="text-xl font-semibold mb-4 font-sans text-textcolor">
               Announcements
             </h2>
-            <div className="w-full flex flex-col items-center space-y-4 text-slate-400">
+            <div className="w-full flex flex-col items-center space-y-4 text-textcolor">
               <Mic className="w-10 h-10" />
               <p className="text-sm font-medium">
                 No announcements at this time.
@@ -154,27 +182,7 @@ const WelcomeScreenContainer = () => {
             </div>
           </div>
         </div>
-        <div className="p-4 bg-slate-800 rounded-xl shadow-md col-span-1 flex flex-col items-center justify-between">
-          <h2 className="text-xl text-slate-50 font-bold mb-4 w-full text-start">
-            Quick Actions
-          </h2>
-          <Activity className="w-10 h-10 text-slate-400 animate-pulse" />
-          <div className="w-full flex justify-between">
-            <Link
-              href="/block-request"
-              className="bg-blue-500 text-sm text-center hover:bg-blue-600 w-full text-white font-semibold px-4 py-2 rounded-md mr-2"
-            >
-              Create Block Request
-            </Link>
-            <Link
-              href="/view-requests"
-              className="bg-red-500 text-sm text-center hover:bg-red-600 w-full text-white font-semibold px-4 py-2 rounded-md"
-            >
-              View Requests
-            </Link>
-          </div>
-        </div>
-        <div className="p-4 bg-white rounded-lg border-t shadow-md col-span-2">
+        <div className="p-4 bg-white rounded-xl border-t shadow-md col-span-2">
           <h2 className="text-xl font-bold mb-4">Statistics</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-blue-400 hover:bg-blue-500 ease-in-out duration-300 py-6 text-center rounded-3xl text-slate-50 flex flex-col items-center space-y-2">
@@ -201,7 +209,7 @@ const WelcomeScreenContainer = () => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

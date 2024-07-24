@@ -92,7 +92,6 @@ const GanttChart1 = ({ tasks }) => {
     return colors[teamId % colors.length];
   };
 
-  // console.log(groupedTasks[1][0].teamTasks)
 
   return (
     <div className="gantt-chart">

@@ -82,7 +82,6 @@ const RequestTable = () => {
         .get(process.env.REACT_APP_API_URI + "/editlineblock")
         .then((res) => {
           SetRequestList(res.data.data.request);
-          console.log("request", res.data.data.request);
         })
         .catch((error) => console.error(error));
     }
