@@ -10,10 +10,15 @@ import {
 } from "@/components/ui/carousel";
 import Loader from "../Loader";
 import moment from "moment";
+import { Button } from "@/components/ui/button";
 
 const WeekSchedule = ({ isStationFetching, scheduleDataByStation }) => {
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(1);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+  useEffect(() => {}, [isStationFetching]);
 
   useEffect(() => {
     if (!api) {
@@ -30,6 +35,46 @@ const WeekSchedule = ({ isStationFetching, scheduleDataByStation }) => {
     setCurrent(index + 1);
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      alert("Please select a file to upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("csrFile", selectedFile);
+
+    try {
+      setUploading(true);
+      const response = await fetch('/api/upload', { // Adjust the URL to your API endpoint
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      // Handle response data if needed
+      const result = await response.json();
+      console.log('File uploaded successfully:', result);
+      alert("File uploaded successfully!");
+      setSelectedFile(null); // Clear the file input after upload
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert("Error uploading file.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   return (
     <div className="w-full px-24 flex flex-1 h-full rounded-xl flex-col items-center space-y-10 pt-10 bg-secondary">
       {isStationFetching ? (
@@ -37,7 +82,7 @@ const WeekSchedule = ({ isStationFetching, scheduleDataByStation }) => {
           <Loader />
         </div>
       ) : (
-        scheduleDataByStation && (
+        scheduleDataByStation && scheduleDataByStation.week.length > 0 ? (
           <section className="w-full">
             <Carousel
               opts={{
@@ -81,6 +126,22 @@ const WeekSchedule = ({ isStationFetching, scheduleDataByStation }) => {
               <CarouselNext />
             </Carousel>
           </section>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center flex-col space-y-4">
+            <input
+              type="file"
+              accept=".csr" // Adjust based on your file type
+              onChange={handleFileChange}
+              className="mb-4 w-1/2"
+            />
+            <Button 
+              className="text-textcolor" 
+              onClick={handleUpload} 
+              disabled={uploading}
+            >
+              {uploading ? 'Uploading...' : 'Upload CSR'}
+            </Button>
+          </div>
         )
       )}
     </div>

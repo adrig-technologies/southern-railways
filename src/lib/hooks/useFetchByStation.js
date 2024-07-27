@@ -13,7 +13,7 @@ const useFetchByStation = (start, end) => {
         const response = await new Promise((resolve) => {
           setTimeout(() => {
             const data = {
-              station: "Thambaram to Beach",
+              station: "Thambaram to Beach", 
               week: [
                 { date: "2024-07-21", conflictCount: 3, availableSlot: 8 },
                 { date: "2024-07-22", conflictCount: 5, availableSlot: 6 },

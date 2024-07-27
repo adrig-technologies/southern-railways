@@ -14,7 +14,7 @@ const useFetchStationsList = () => {
               { id: 2, from: "Beach", to: "Tambaram" }
             ];
             resolve({ ok: true, json: () => Promise.resolve(data) });
-          }, 1000);
+          }, 0);
         });
 
         if (!response.ok) {

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import {
   House,
   CalendarCog,
+  CirclePlus,
   LogOut,
   Settings
 } from "lucide-react";
@@ -50,10 +51,11 @@ const SidebarMenu = () => {
                 <CalendarCog className="w-4 h-4 mr-2" />
                 <span>Schedule Manager</span>
               </Link>
-              {/* <Link href="/block-request" className="flex items-center px-4 py-2 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
+              <Link href="/block-request" className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full">
             <CirclePlus className="w-4 h-4 mr-2" />
               <span>Create Block Request</span>
             </Link>
+              {/* 
             <Link href="/requests" className="flex items-center px-4 py-2 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
             <Pencil className="w-4 h-4 mr-2" />
               <span>Requests</span>

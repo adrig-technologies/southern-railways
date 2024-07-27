@@ -8,10 +8,15 @@ import useFetchByStation from "@/lib/hooks/useFetchByStation";
 const ScheduleManager = () => {
   const { isStationFetching, stationData } = useFetchByStation();
   const [scheduleDataByStation, setScheduleDataByStation] = useState(null);
+  const [isLoading, setIsLoading] = useState(isStationFetching);
 
   useEffect(() => {
     setScheduleDataByStation(stationData);
   }, [stationData]);
+
+  useEffect(() => {
+    setIsLoading(isStationFetching);
+  }, [isStationFetching]);
 
   return (
     <div className='w-full h-[95vh] flex flex-col items-center space-y-6'>

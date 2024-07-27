@@ -9,11 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import useFetchByStation from "@/lib/hooks/useFetchByStation";
 import useFetchStationsList from "@/lib/hooks/useFetchStationsList";
+import useFetchByStation from "@/lib/hooks/useFetchByStation";
+import AddHoc from "./AddHoc";
 
 const ToolBar = ({ setScheduleDataByStation }) => {
   const { stationsListData } = useFetchStationsList();
@@ -22,9 +21,9 @@ const ToolBar = ({ setScheduleDataByStation }) => {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
 
-  const { stationData, isStationFetching, error } = useFetchByStation(start, end);
+  // Fetch station data whenever start or end changes
+  const { stationData } = useFetchByStation(start, end);
 
-  // Effect to update stations list and set default station
   useEffect(() => {
     if (stationsListData && stationsListData.length > 0) {
       setStationsList(stationsListData);
@@ -35,21 +34,12 @@ const ToolBar = ({ setScheduleDataByStation }) => {
     }
   }, [stationsListData]);
 
-  // Effect to fetch station data when start or end changes
-  useEffect(() => {
-    if (start && end) {
-      // No need to manually call the hook here, it will handle itself based on state changes
-    }
-  }, [start, end]);
-
-  // Effect to handle fetched data
   useEffect(() => {
     if (stationData) {
       setScheduleDataByStation(stationData);
     }
   }, [stationData, setScheduleDataByStation]);
 
-  // Handle select change
   const handleSelectChange = (value) => {
     setSelectedStation(value);
     const selectedStationObj = stationsList.find(
@@ -87,13 +77,10 @@ const ToolBar = ({ setScheduleDataByStation }) => {
             </SelectContent>
           </Select>
         )}
-        <div className="flex items-center space-x-2">
-          <Switch id="airplane-mode" />
-          <Label htmlFor="airplane-mode">Ad-Hoc</Label>
-        </div>
+        <AddHoc />
       </div>
       <div>
-        <Button className="rounded-3xl bg-primarygreen w-32 font-bold shadow-md shadow-secondary-foreground">
+        <Button className="rounded-3xl bg-primarygreen text-white w-32 font-bold shadow-md shadow-secondary-foreground">
           <span>Optimize</span>
         </Button>
       </div>

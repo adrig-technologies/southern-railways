@@ -98,7 +98,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
   const availableTimings = mapTimeSlots();
 
   return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-secondary rounded-xl flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
         <div className="w-4/5 space-y-8">
           <div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Block Request</h2>
@@ -106,12 +106,12 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
           <form className="mt-8 space-y-6 w-full" onSubmit={formik.handleSubmit}>
             <div className="w-full grid grid-cols-2 gap-2">
               <div className="mb-4 col-span-1">
-                <label htmlFor="date" className="text-md ml-2 text-slate-500">Block Date <strong className='text-destructive'>*</strong></label>
+                <label htmlFor="date" className="text-sm font-medium text-text-color">Block Date <strong className='text-destructive'>*</strong></label>
                 <input
                   id="date"
                   name="date"
                   type="date"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.date}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -119,11 +119,11 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.date && formik.errors.date && <p className="mt-2 text-sm text-red-600">{formik.errors.date}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="blocktype" className="text-md ml-2 text-slate-500">Block Type <strong className='text-destructive'>*</strong></label>
+                <label htmlFor="blocktype" className="text-sm font-medium text-text-color">Block Type <strong className='text-destructive'>*</strong></label>
                 <select
                   id="blocktype"
                   name="blocktype"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.blocktype}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -135,11 +135,11 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.blocktype && formik.errors.blocktype && <p className="mt-2 text-sm text-red-600">{formik.errors.blocktype}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="worktype" className="text-md ml-2 text-slate-500">Work Type <strong className='text-destructive'>*</strong></label>
+                <label htmlFor="worktype" className="text-sm font-medium text-text-color">Work Type <strong className='text-destructive'>*</strong></label>
                 <select
                   id="worktype"
                   name="worktype"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.worktype}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -152,7 +152,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.worktype && formik.errors.worktype && <p className="mt-2 text-sm text-red-600">{formik.errors.worktype}</p>}
               </div>
               <div>
-              <label className="text-md ml-2 text-slate-500">Section <strong className='text-destructive'>*</strong></label>
+              <label className="text-sm font-medium text-text-color">Section <strong className='text-destructive'>*</strong></label>
                <select
                   value={formik.values.section}
                   onChange={formik.handleChange}
@@ -170,7 +170,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 )}
               </div>
               <div>
-                <label className="text-md ml-2 text-slate-500">Station Between <strong className='text-destructive'>*</strong></label>
+                <label className="text-sm font-medium text-text-color">Station Between <strong className='text-destructive'>*</strong></label>
                 <select
                   value={formik.values.station}
                   onChange={formik.handleChange}
@@ -188,11 +188,11 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 )}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="line" className="text-md ml-2 text-slate-500">Line <strong className='text-destructive'>*</strong></label>
+                <label htmlFor="line" className="text-sm font-medium text-text-color">Line <strong className='text-destructive'>*</strong></label>
                 <select
                   id="line"
                   name="line"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.line}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -204,12 +204,12 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.line && formik.errors.line && <p className="mt-2 text-sm text-red-600">{formik.errors.line}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="demandfrom" className="text-md ml-2 text-slate-500">Demand From <strong className='text-destructive'>*</strong></label>
+                <label htmlFor="demandfrom" className="text-sm font-medium text-text-color">Demand From <strong className='text-destructive'>*</strong></label>
                 <input
                   id="demandfrom"
                   name="demandfrom"
                   type="time"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.demandfrom}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -217,12 +217,12 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.demandfrom && formik.errors.demandfrom && <p className="mt-2 text-sm text-red-600">{formik.errors.demandfrom}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="demandto" className="text-md ml-2 text-slate-500">Demand To <strong className='text-destructive'>*</strong></label>
+                <label htmlFor="demandto" className="text-sm font-medium text-text-color">Demand To <strong className='text-destructive'>*</strong></label>
                 <input
                   id="demandto"
                   name="demandto"
                   type="time"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.demandto}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -230,11 +230,11 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.demandto && formik.errors.demandto && <p className="mt-2 text-sm text-red-600">{formik.errors.demandto}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="ohed" className="text-md ml-2 text-slate-500"> OHE Disconnection</label>
+                <label htmlFor="ohed" className="text-sm font-medium text-text-color"> OHE Disconnection</label>
                 <select
                   id="ohed"
                   name="ohed"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.ohed}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -245,12 +245,12 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.ohed && formik.errors.ohed && <p className="mt-2 text-sm text-red-600">{formik.errors.ohed}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="ohedr" className="text-md ml-2 text-slate-500"> OHE Disconnection Remark</label>
+                <label htmlFor="ohedr" className="text-sm font-medium text-text-color"> OHE Disconnection Remark</label>
                 <input
                   id="ohedr"
                   name="ohedr"
                   type="text"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="OHE Disconnection Remark"
                   value={formik.values.ohedr}
                   onChange={formik.handleChange}
@@ -259,11 +259,11 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.ohedr && formik.errors.ohedr && <p className="mt-2 text-sm text-red-600">{formik.errors.ohedr}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="sntd" className="text-md ml-2 text-slate-500"> S&T Disconnection</label>
+                <label htmlFor="sntd" className="text-sm font-medium text-text-color"> S&T Disconnection</label>
                 <select
                   id="sntd"
                   name="sntd"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   value={formik.values.sntd}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -274,12 +274,12 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.sntd && formik.errors.sntd && <p className="mt-2 text-sm text-red-600">{formik.errors.sntd}</p>}
               </div>
               <div className="mb-4 col-span-1">
-                <label htmlFor="sntdr" className="text-md ml-2 text-slate-500"> S&T Disconnection Remark</label>
+                <label htmlFor="sntdr" className="text-sm font-medium text-text-color"> S&T Disconnection Remark</label>
                 <input
                   id="sntdr"
                   name="sntdr"
                   type="text"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="S&T Disconnection Remark"
                   value={formik.values.sntdr}
                   onChange={formik.handleChange}
@@ -288,12 +288,12 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
                 {formik.touched.sntdr && formik.errors.sntdr && <p className="mt-2 text-sm text-red-600">{formik.errors.sntdr}</p>}
               </div>
               <div className="mb-4 col-span-2">
-                <label htmlFor="remark" className="text-md ml-2 text-slate-500"> Remark</label>
+                <label htmlFor="remark" className="text-sm font-medium text-text-color"> Remark</label>
                 <textarea
                   id="remark"
                   name="remark"
                   rows={4}
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Remark"
                   value={formik.values.remark}
                   onChange={formik.handleChange}
@@ -306,13 +306,13 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
               <button
                 type="button"
                 onClick={() => formik.resetForm()}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-textcolor bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Reset
               </button>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-semibold rounded-md text-textcolor bg-primary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                {isLoading ? <Spinner /> : <span>Submit</span>}
               </button>
