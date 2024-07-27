@@ -107,3 +107,13 @@
 @keyframes l13{ 
   100%{transform: rotate(1turn)}
 }
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}

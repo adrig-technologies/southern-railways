@@ -23,7 +23,7 @@ const SidebarMenu = () => {
 
   return (
         <div
-          className="fixed font-sans flex flex-col space-y-4 inset-y-0 top-6 left-4 p-4 h-[95%] w-[20%] bg-secondary text-textcolor rounded-xl">
+          className="font-sans flex flex-col space-y-4 p-4 h-full bg-secondary text-textcolor rounded-xl col-span-2">
           <span className="px-5 font-medium">Maintenance Management</span>
           <div className="flex-1 flex flex-col space-y-4 px-4">
             {/* <p className="text-lg font-bold px-4">Chennai Division</p>
