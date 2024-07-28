@@ -1,25 +1,553 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Loader from "../Loader";
-import moment from "moment";
-import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { GanttChartModern } from "../GanttChartModern";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import moment from "moment"
+const data={
+  "endDate": "08/11/2023",
+  "startDate": "08/07/2023",
+  "week": [
+      {
+          "date": "8/7/2023",
+          "stations": [
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "15:30",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "AJJ-AJJN"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "00:30"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "15:00",
+                          "startHour": "14:00"
+                      }
+                  ],
+                  "stationName": "VKZ-NG"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "15:30",
+                          "startHour": "14:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "EKM-VGA"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "15:30",
+                          "startHour": "14:30"
+                      }
+                  ],
+                  "stationName": "TDK-PUDI"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "15:00",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "AJJN-TRT"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "TRT-POI"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "00:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "03:00",
+                          "startHour": "14:00"
+                      }
+                  ],
+                  "stationName": "PUT-TDK"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "15:30",
+                          "startHour": "14:30"
+                      }
+                  ],
+                  "stationName": "PUDI-RU"
+              }
+          ]
+      },
+      {
+          "date": "8/8/2023",
+          "stations": [
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "03:30",
+                          "startHour": "14:30"
+                      },
+                      {
+                          "clashed": true,
+                          "endHour": "15:30",
+                          "startHour": "14:00"
+                      },
+                      {
+                          "clashed": true,
+                          "endHour": "15:30",
+                          "startHour": "14:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      }
+                  ],
+                  "stationName": "VGA-PUT"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "03:30",
+                          "startHour": "14:00"
+                      }
+                  ],
+                  "stationName": "VKZ-NG"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:30"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:00"
+                      }
+                  ],
+                  "stationName": "TDK-PUDI"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      }
+                  ],
+                  "stationName": "POI-VKZ"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "00:00"
+                      }
+                  ],
+                  "stationName": "AJJN-TRT"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "EKM-VGA"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "15:30",
+                          "startHour": "14:00"
+                      }
+                  ],
+                  "stationName": "TRT-POI"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "PUDI-RU"
+              }
+          ]
+      },
+      {
+          "date": "8/9/2023",
+          "stations": [
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "15:00",
+                          "startHour": "13:30"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "PUDI-RU"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "AJJ-AJJN"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      }
+                  ],
+                  "stationName": "POI-VKZ"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "VKZ-NG"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "EKM-VGA"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": true,
+                          "endHour": "14:30",
+                          "startHour": "13:00"
+                      },
+                      {
+                          "clashed": true,
+                          "endHour": "15:00",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "PUT-TDK"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      }
+                  ],
+                  "stationName": "AJJN-TRT"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "13:00"
+                      }
+                  ],
+                  "stationName": "NG-EKM"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "TDK-PUDI"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "VGA-PUT"
+              }
+          ]
+      },
+      {
+          "date": "8/10/2023",
+          "stations": [
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:00"
+                      }
+                  ],
+                  "stationName": "AJJN-TRT"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "NG-EKM"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:00"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "TRT-POI"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:00",
+                          "startHour": "00:00"
+                      }
+                  ],
+                  "stationName": "PUT-TDK"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:00"
+                      }
+                  ],
+                  "stationName": "AJJ-AJJN"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "00:30"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "15:00",
+                          "startHour": "14:00"
+                      }
+                  ],
+                  "stationName": "VKZ-NG"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "VGA-PUT"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:30"
+                      }
+                  ],
+                  "stationName": "PUDI-RU"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "13:00"
+                      }
+                  ],
+                  "stationName": "POI-VKZ"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "13:30",
+                          "startHour": "00:30"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "15:30",
+                          "startHour": "14:30"
+                      }
+                  ],
+                  "stationName": "TDK-PUDI"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "14:00"
+                      }
+                  ],
+                  "stationName": "EKM-VGA"
+              }
+          ]
+      },
+      {
+          "date": "8/11/2023",
+          "stations": [
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "EKM-VGA"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "VGA-PUT"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:00",
+                          "startHour": "00:30"
+                      },
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "PUDI-RU"
+              },
+              {
+                  "requests": [
+                      {
+                          "clashed": false,
+                          "endHour": "14:30",
+                          "startHour": "13:30"
+                      }
+                  ],
+                  "stationName": "POI-VKZ"
+              }
+          ]
+      }
+  ]
+}
 
 const WeekSchedule = ({
   isStationFetching,
-  scheduleDataByStation,
   setIsGanttView,
 }) => {
   const [api, setApi] = useState(null);
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
@@ -35,9 +563,9 @@ const WeekSchedule = ({
       api.off("select");
     };
   }, [api]);
-
+  
   const handleItemClick = (index) => {
-    setCurrent(index + 1);
+    setCurrent(index+1);
   };
 
   const handleFileChange = (event) => {
@@ -81,6 +609,7 @@ const WeekSchedule = ({
     }
   };
 
+
   return (
     <div className="w-full max-w-6xl mx-auto py-8 px-6 bg-secondary rounded-xl">
       <div className="flex justify-between items-center mb-4 w-full">
@@ -100,7 +629,47 @@ const WeekSchedule = ({
           </div>
         </div>
       </div>
-      {isStationFetching ? (
+      <section className="w-full">
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-full mb-5"
+            setApi={setApi}
+          >
+            <CarouselContent className="ml-1">
+              {data.week.map((day, index) => (
+                <CarouselItem
+                  key={index}
+                  className={`h-24 bg-cardbg basis-1/4 ml-5 text-textcolor bg-white font-semibold rounded-lg ${
+                    current === index + 1
+                      ? "bg-primary font-black"
+                      : "hover:bg-primary-foreground ease-in-out duration-200"
+                  }`}
+                  onClick={() => handleItemClick(index)}
+                >
+                  <div className="flex flex-col items-start p-4">
+                    <span>{moment(day.date).format("DD/MM/YYYY")}</span>
+                    <div className="flex flex-col items-start space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-4 aspect-square rounded-full bg-orange-400 animate-pulse"></div>
+                        <span className="text-sm font-semibold">
+                          <strong>{day.stations.reduce((acc,curr)=>{
+                            return acc+curr.requests.filter(r=>r.clashed).length
+                          },0)}</strong> no. of conflicts
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </section>
+      <GanttChartModern data={data.week[current]}/>
+      {/* {isStationFetching ? (
         <div className="w-full h-full flex items-center justify-center">
           <Loader />
         </div>
@@ -165,7 +734,7 @@ const WeekSchedule = ({
             {uploading ? "Uploading..." : "Upload CSR"}
           </Button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

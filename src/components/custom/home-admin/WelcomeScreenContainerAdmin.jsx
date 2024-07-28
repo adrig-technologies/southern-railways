@@ -4,23 +4,18 @@ import React from "react";
 import Link from "next/link";
 import Lottie from "lottie-react";
 import { NoActivity } from "@/assets";
-import { Chart } from "react-google-charts";
 import {
   Mic,
   CircleCheck,
   CircleDashed,
   Send,
-  Activity,
-  CircleUserRound,
   MoveRight,
   Upload,
   Calendar,
-  ArrowBigRight,
-  AlignRightIcon,
-  Play,
   ChevronRightIcon,
+  CalendarClock,
+  ChevronRight,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const getFormattedDate = () => {
   const date = new Date();
@@ -72,6 +67,62 @@ const getFormattedDate = () => {
       {dayOfWeek}, {month} {day}
       <sup>{ordinalSuffix}</sup>
     </>
+  );
+};
+const QuickLinksCard = ({ title, description }) => (
+  <div className="p-6 bg-white rounded-xl ">
+    <h3 className="text-lg font-bold text-textcolor mb-2">{title}</h3>
+    <p className="text-gray-600">{description}</p>
+  </div>
+);
+
+const QuickLinks = ({ links }) => {
+  return (
+    <div className="w-full mx-auto p-6 bg-[#f7c4d4] rounded-xl col-span-2">
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-textcolor">Quick links</h2>
+        <p className="text-gray-600">There are requests to be optimised.</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {links.map((link, index) => (
+          <QuickLinksCard
+            key={index}
+            title={link.title}
+            description={link.description}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+const ScheduleCard = ({ schedules }) => {
+  return (
+    <div className="w-full mx-auto p-6 bg-[#f7c4d4] rounded-xl col-span-2">
+      <div className="flex justify-between items-center mb-4">
+        <span className="text-xl font-bold text-textcolor">Station Schedules</span>
+        <a href="#" className="text-purple-700">
+          View all
+        </a>
+      </div>
+      <p className="text-gray-600 mb-6">There are requests to be optimised.</p>
+      <div className="space-y-1">
+        {schedules.map((schedule, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between py-1 px-3 bg-white rounded-md"
+          >
+            <div className="flex items-center">
+              <CalendarClock className="mr-3" />
+              <div>
+                <p className="font-medium text-black">{schedule.station}</p>
+                <p className="text-gray-600">{schedule.details}</p>
+              </div>
+            </div>
+            <ChevronRight />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -190,6 +241,21 @@ const WelcomeScreenContainerUser = () => {
           How this week looks
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full rounded-xl">
+          <ScheduleCard
+            schedules={[
+              { station: "AAK - FSS", details: "4 Schedules and 2 Conflicts" },
+              { station: "JIY - FSS", details: "7 Schedules and 2 Conflicts" },
+              { station: "AHM - FSS", details: "8 Schedules and 1 Conflict" },
+              { station: "RTT - FSS", details: "4 Schedules and no Conflicts" },
+              { station: "RTT - FSS", details: "1 Schedule and no Conflicts" },
+            ]}
+          />
+          <QuickLinks links={[
+  { title: 'This Week', description: 'There are requests to be optimised.' },
+  { title: 'Users', description: 'Manage your users' },
+  { title: 'Timeslots', description: 'Edit and manage your timeslots' },
+  { title: 'Optimize', description: 'Optimise Requests' },
+]}/>
           <div className="p-6 bg-primary border-t rounded-xl shadow-md col-span-2">
             <h2 className="text-xl text-textcolor ">Station Schedules</h2>
             <span className="text-xs font-bold">

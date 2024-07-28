@@ -31,14 +31,14 @@ const SidebarMenu = () => {
             </div> */}
         <nav className="space-y-1 text-sm border-b-2 border-secondary-foreground">
           <Link
-            href="/"
+            href="/admin-home"
             className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
           >
             <House className="w-4 h-4 mr-2" />
             <span>Home</span>
           </Link>
           <Link
-            href="/request-table"
+            href="/schedule-manager"
             className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
           >
             <CalendarCog className="w-4 h-4 mr-2" />
@@ -52,7 +52,7 @@ const SidebarMenu = () => {
             <span>Corridor</span>
           </Link>
           <Link
-            href="/request-table"
+            href="/schedule-manager"
             className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
           >
             <CalendarCheck className="w-4 h-4 mr-2" />
