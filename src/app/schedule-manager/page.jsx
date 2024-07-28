@@ -1,11 +1,9 @@
-import { ScheduleManager } from '@/components/custom/schedulemanager'
-import React from 'react'
+import { ScheduleManager } from "@/components/custom/schedulemanager";
+import React from "react";
+
 
 const Page = () => {
-  
-  return (
-    <ScheduleManager />
-  )
-}
+  return <ScheduleManager />;
+};
 
-export default Page
+export default Page;

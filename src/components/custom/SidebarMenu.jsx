@@ -2,13 +2,7 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import {
-  House,
-  CalendarCog,
-  CirclePlus,
-  LogOut,
-  Settings
-} from "lucide-react";
+import { House, CalendarCog, CirclePlus, LogOut, Settings, TrainTrack, CalendarCheck } from "lucide-react";
 
 const SidebarMenu = () => {
   const [blockDetailsOpen, setBlockDetailsOpen] = useState(false);
@@ -23,11 +17,10 @@ const SidebarMenu = () => {
   };
 
   return (
-        <div
-          className="font-sans flex flex-col space-y-4 p-4 h-full bg-secondary text-textcolor rounded-xl col-span-2">
-          <span className="px-5 font-medium">Maintenance Management</span>
-          <div className="flex-1 flex flex-col space-y-4 px-4">
-            {/* <p className="text-lg font-bold px-4">Chennai Division</p>
+    <div className="font-sans flex flex-col space-y-4 p-4 h-full bg-secondary text-textcolor rounded-xl col-span-2">
+      <span className="px-5 font-medium">Maintenance Management</span>
+      <div className="flex-1 flex flex-col space-y-4 px-4">
+        {/* <p className="text-lg font-bold px-4">Chennai Division</p>
             <div className="px-4 mb-4">
               <p className="text-xs text-textcolor">
                 Welcome, <br />
@@ -36,26 +29,50 @@ const SidebarMenu = () => {
                 </strong>
               </p>
             </div> */}
-            <nav className="space-y-1 text-sm border-b-2 border-secondary-foreground">
-              <Link
-                href="/"
-                className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
-              >
-                <House className="w-4 h-4 mr-2" />
-                <span>Home</span>
-              </Link>
-              <Link
-                href="/schedule-manager"
-                className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
-              >
-                <CalendarCog className="w-4 h-4 mr-2" />
-                <span>Schedule Manager</span>
-              </Link>
-              <Link href="/block-request" className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full">
+        <nav className="space-y-1 text-sm border-b-2 border-secondary-foreground">
+          <Link
+            href="/"
+            className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
+          >
+            <House className="w-4 h-4 mr-2" />
+            <span>Home</span>
+          </Link>
+          <Link
+            href="/request-table"
+            className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
+          >
+            <CalendarCog className="w-4 h-4 mr-2" />
+            <span>Request Table</span>
+          </Link>
+          <Link
+            href="/request-table"
+            className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
+          >
+            <TrainTrack className="w-4 h-4 mr-2" />
+            <span>Corridor</span>
+          </Link>
+          <Link
+            href="/request-table"
+            className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
+          >
+            <CalendarCheck className="w-4 h-4 mr-2" />
+            <span>Optimised Table</span>
+          </Link>
+          {/* <Link
+            href="/schedule-manager"
+            className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
+          >
+            <CalendarCog className="w-4 h-4 mr-2" />
+            <span>Schedule Manager</span>
+          </Link>
+          <Link
+            href="/block-request"
+            className="flex items-center hover:bg-secondary-foreground hover:rounded-full p-4 font-semibold ease-in-out duration-300 w-full"
+          >
             <CirclePlus className="w-4 h-4 mr-2" />
-              <span>Create Block Request</span>
-            </Link>
-              {/* 
+            <span>Create Block Request</span>
+          </Link> */}
+          {/* 
             <Link href="/requests" className="flex items-center px-4 py-2 hover:bg-slate-300 hover:text-slate-950 font-medium ease-in-out duration-300 w-full">
             <Pencil className="w-4 h-4 mr-2" />
               <span>Requests</span>
@@ -84,20 +101,20 @@ const SidebarMenu = () => {
             <CalendarCheck2 className="w-4 h-4 mr-2"/>
               <span>Optimized Table</span>
             </Link> */}
-            </nav>
-          </div>
-          <div className="px-2 w-[90%] mx-auto py-4 border-t-2 border-secondary-foreground flex flex-col items-start space-y-2">
-            <span className="px-2 font-medium">System</span>
-            <div className="flex items-center hover:bg-secondary-foreground hover:rounded-full px-4 py-2 font-semibold ease-in-out duration-300 w-full">
-            <Settings className="w-4 h-4 mr-2" />
-              <span>Setting</span>
-            </div>
-            <div className="flex items-center hover:bg-secondary-foreground hover:rounded-full px-4 py-2 font-semibold ease-in-out duration-300 w-full">
-            <LogOut className="w-4 h-4 mr-2" />
-              <span>Sign Out</span>
-            </div>
-          </div>
+        </nav>
+      </div>
+      <div className="px-2 w-[90%] mx-auto py-4 border-t-2 border-secondary-foreground flex flex-col items-start space-y-2">
+        <span className="px-2 font-medium">System</span>
+        <div className="flex items-center hover:bg-secondary-foreground hover:rounded-full px-4 py-2 font-semibold ease-in-out duration-300 w-full">
+          <Settings className="w-4 h-4 mr-2" />
+          <span>Setting</span>
         </div>
+        <div className="flex items-center hover:bg-secondary-foreground hover:rounded-full px-4 py-2 font-semibold ease-in-out duration-300 w-full">
+          <LogOut className="w-4 h-4 mr-2" />
+          <span>Sign Out</span>
+        </div>
+      </div>
+    </div>
   );
 };
 
