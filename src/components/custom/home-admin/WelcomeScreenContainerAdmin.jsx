@@ -6,13 +6,8 @@ import Lottie from "lottie-react";
 import { NoActivity } from "@/assets";
 import {
   Mic,
-  CircleCheck,
-  CircleDashed,
-  Send,
   MoveRight,
   Upload,
-  Calendar,
-  ChevronRightIcon,
   CalendarClock,
   ChevronRight,
 } from "lucide-react";
