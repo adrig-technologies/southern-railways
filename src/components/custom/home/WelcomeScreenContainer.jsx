@@ -105,16 +105,16 @@ const WelcomeScreenContainer = () => {
             {getFormattedDate()}
           </span>
           <h1 className="text-3xl font-bold mb-4 text-slate-950">
-            Welcome, Admin 🎉
+            Welcome, User 🎉
           </h1>
           <p className="text-md text-textcolor mb-4">
             Manage your block requests efficiently and effectively.
           </p>
         </div>
-        <Button className="bg-secondary-foreground text-textcolor flex items-center space-x-4 p-4 font-semibold rounded-full">
+        {/* <Button className="bg-secondary-foreground text-textcolor flex items-center space-x-4 p-4 font-semibold rounded-full">
         <CircleUserRound />
         <span>Admin</span>
-        </Button>
+        </Button> */}
         </div>
         <div className="p-4 w-1/2 bg-primary rounded-xl text-textcolor shadow-md col-span-1 flex flex-col items-center justify-between space-y-2">
           <h2 className="text-xl font-bold mb-4 w-full text-start">
