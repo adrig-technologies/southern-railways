@@ -99,7 +99,9 @@ const ScheduleCard = ({ schedules }) => {
   return (
     <div className="w-full mx-auto p-6 bg-[#f7c4d4] rounded-xl col-span-2">
       <div className="flex justify-between items-center mb-4">
-        <span className="text-xl font-bold text-textcolor">Station Schedules</span>
+        <span className="text-xl font-bold text-textcolor">
+          Station Schedules
+        </span>
         <a href="#" className="text-purple-700">
           View all
         </a>
@@ -250,76 +252,20 @@ const WelcomeScreenContainerUser = () => {
               { station: "RTT - FSS", details: "1 Schedule and no Conflicts" },
             ]}
           />
-          <QuickLinks links={[
-  { title: 'This Week', description: 'There are requests to be optimised.' },
-  { title: 'Users', description: 'Manage your users' },
-  { title: 'Timeslots', description: 'Edit and manage your timeslots' },
-  { title: 'Optimize', description: 'Optimise Requests' },
-]}/>
-          <div className="p-6 bg-primary border-t rounded-xl shadow-md col-span-2">
-            <h2 className="text-xl text-textcolor ">Station Schedules</h2>
-            <span className="text-xs font-bold">
-              There are request to be optimised
-            </span>
-            <div className="py-6">
-              <div className="bg-white flex text-xs mb-1">
-                <Calendar className="my-auto mr-2" />
-                <div>
-                  <p>AAK-FFS</p>
-                  <p>4 Schedules and 2 Conflicts</p>
-                </div>
-                <ChevronRightIcon className="my-auto ml-auto mr-2" />
-              </div>
-              <div className="bg-white flex text-xs mb-1">
-                <Calendar className="my-auto mr-2" />
-                <div>
-                  <p>AAK-FFS</p>
-                  <p>4 Schedules and 2 Conflicts</p>
-                </div>
-                <ChevronRightIcon className="my-auto ml-auto mr-2" />
-              </div>
-              <div className="bg-white flex text-xs mb-1">
-                <Calendar className="my-auto mr-2" />
-                <div>
-                  <p>AAK-FFS</p>
-                  <p>4 Schedules and 2 Conflicts</p>
-                </div>
-                <ChevronRightIcon className="my-auto ml-auto mr-2" />
-              </div>
-              <div className="bg-white flex text-xs mb-1">
-                <Calendar className="my-auto mr-2" />
-                <div>
-                  <p>AAK-FFS</p>
-                  <p>4 Schedules and 2 Conflicts</p>
-                </div>
-                <ChevronRightIcon className="my-auto ml-auto mr-2" />
-              </div>
-              <div className="bg-white flex text-xs mb-1">
-                <Calendar className="my-auto mr-2" />
-                <div>
-                  <p>AAK-FFS</p>
-                  <p>4 Schedules and 2 Conflicts</p>
-                </div>
-                <ChevronRightIcon className="my-auto ml-auto mr-2" />
-              </div>
-              <div className="bg-white flex text-xs mb-1">
-                <Calendar className="my-auto mr-2" />
-                <div>
-                  <p>AAK-FFS</p>
-                  <p>4 Schedules and 2 Conflicts</p>
-                </div>
-                <ChevronRightIcon className="my-auto ml-auto mr-2" />
-              </div>
-              <div className="bg-white flex text-xs mb-1">
-                <Calendar className="my-auto mr-2" />
-                <div>
-                  <p>AAK-FFS</p>
-                  <p>4 Schedules and 2 Conflicts</p>
-                </div>
-                <ChevronRightIcon className="my-auto ml-auto mr-2" />
-              </div>
-            </div>
-          </div>
+          <QuickLinks
+            links={[
+              {
+                title: "This Week",
+                description: "There are requests to be optimised.",
+              },
+              { title: "Users", description: "Manage your users" },
+              {
+                title: "Timeslots",
+                description: "Edit and manage your timeslots",
+              },
+              { title: "Optimize", description: "Optimise Requests" },
+            ]}
+          />
 
           <div className="flex flex-col h-full col-span-2 justify-start space-y-8">
             <div className="p-4 bg-primary rounded-xl shadow-md">
@@ -350,7 +296,7 @@ const WelcomeScreenContainerUser = () => {
               </div>
             </div>
           </div>
-          <div className="p-4 bg-white rounded-xl border-t shadow-md col-span-2">
+          {/* <div className="p-4 bg-white rounded-xl border-t shadow-md col-span-2">
             <h2 className="text-xl font-bold mb-4">Statistics</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-blue-400 hover:bg-blue-500 ease-in-out duration-300 py-6 text-center rounded-3xl text-slate-50 flex flex-col items-center space-y-2">
@@ -375,7 +321,7 @@ const WelcomeScreenContainerUser = () => {
                 <p className="text-sm">Pending Requests</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
