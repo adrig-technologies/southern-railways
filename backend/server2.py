@@ -97,6 +97,8 @@ def process_csv(filepath):
             )
             db.session.add(request_entry)
         db.session.commit()
+        # Sync AdhocRequestTable with the new data in RequestTable
+        sync_adhoc_requests()
 
 def parse_time(time_str):
     try:
@@ -119,7 +121,7 @@ def is_clashing(requests):
 
 @app.route('/read_requests', methods=['GET'])
 def read_requests():
-    requests = RequestTable.query.all()
+    requests = AdhocRequestTable.query.all()
     request_list = []
     start_date = None
     end_date = None
@@ -367,8 +369,30 @@ def add_adhoc_request():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+def sync_adhoc_requests():
+    db.session.query(AdhocRequestTable).delete()  # Clear the table
+    requests = RequestTable.query.all()
+    for request in requests:
+        adhoc_entry = AdhocRequestTable(
+            date=request.date,
+            dept=request.dept,
+            block_section_yard=request.block_section_yard,
+            line=request.line,
+            demanded_time_from=request.demanded_time_from,
+            demanded_time_to=request.demanded_time_to,
+            block_demanded_in_hrs=request.block_demanded_in_hrs,
+            location_from=request.location_from,
+            location_to=request.location_to,
+            nature_of_work=request.nature_of_work,
+            resources_needed=request.resources_needed,
+            supervisors_deputed=request.supervisors_deputed
+        )
+        db.session.add(adhoc_entry)
+    db.session.commit()
+
 if __name__ == '__main__':
     os.makedirs('uploads', exist_ok=True)
     with app.app_context():
         db.create_all()
+        sync_adhoc_requests()  # Populate adhoc_request_table with initial data
     app.run(debug=True)

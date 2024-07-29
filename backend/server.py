@@ -188,9 +188,9 @@ def read_requests():
 
 @app.route('/check_request_table', methods=['GET'])
 def check_table():
-    inspector = inspect(db.engine)
-    table_exists = inspector.has_table('request_table')
-    return jsonify({'exists': table_exists})
+    row_count = db.session.query(RequestTable).count()
+    table_has_rows = row_count > 0
+    return jsonify({'has_rows': table_has_rows})
 
 @app.route('/optimize', methods=['GET'])
 def optimize_table():
@@ -233,9 +233,9 @@ def process_optimized_csv(filepath):
 
 @app.route('/check_optimized_table', methods=['GET'])
 def check_otable():
-    inspector = inspect(db.engine)
-    table_exists = inspector.has_table('optimized_table')
-    return jsonify({'exists': table_exists})
+    row_count = db.session.query(OptimizedTable).count()
+    table_has_rows = row_count > 0
+    return jsonify({'has_rows': table_has_rows})
 
 @app.route('/read_optimized_requests', methods=['GET'])
 def read_optimized_requests():
