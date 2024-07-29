@@ -202,7 +202,7 @@ def optimize_table():
     # Placeholder for optimization logic
     
     # Load optimized data from a local CSV file
-    optimized_filepath = '/Users/apple/Downloads/Optimised table.csv'
+    optimized_filepath = '/Users/apple/Downloads/Request Table - Optimised table (3).csv'
     if os.path.exists(optimized_filepath):
         process_optimized_csv(optimized_filepath)
         return jsonify({'message': 'Optimized table created successfully'}), 200
@@ -322,6 +322,34 @@ def read_optimized_requests():
 
     return jsonify(response)
 
+@app.route('/add_request', methods=['POST'])
+def add_request():
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+
+    try:
+        new_request = RequestTable(
+            date=data.get('date', '0'),
+            dept=data.get('dept', '0'),
+            block_section_yard=data.get('blocksectionyard', '0'),
+            line=data.get('line', '0'),
+            demanded_time_from=data.get('demandfrom', '0'),
+            demanded_time_to=data.get('demandto', '0'),
+            block_demanded_in_hrs=float(data.get('duration', '0').replace('hr', '').strip()) if 'duration' in data else 0,
+            location_from='0',
+            location_to='0',
+            nature_of_work='0',
+            resources_needed='0',
+            supervisors_deputed='0'
+        )
+        db.session.add(new_request)
+        db.session.commit()
+        return jsonify({'message': 'Request added successfully'}), 200
+    except KeyError as e:
+        return jsonify({'error': f'Missing field {e.args[0]}'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     os.makedirs('uploads', exist_ok=True)
