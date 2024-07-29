@@ -63,6 +63,7 @@ def calculate_shadow_blocks(engineering_blocks):
 
 def fit_non_engineering_blocks(non_eng_blocks, shadow_blocks):
     optimized_non_eng_blocks = []
+    remaining_non_eng_blocks = []
     for block in non_eng_blocks:
         block_fitted = False
         for shadow in shadow_blocks:
@@ -75,8 +76,8 @@ def fit_non_engineering_blocks(non_eng_blocks, shadow_blocks):
                 block_fitted = True
                 break
         if not block_fitted:
-            optimized_non_eng_blocks.append(block)  # For now, add to the same list; in practice, handle corridor blocks
-    return optimized_non_eng_blocks
+            remaining_non_eng_blocks.append(block)
+    return optimized_non_eng_blocks, remaining_non_eng_blocks
 
 def optimize_requests(requests):
     # Sort by engineering request count per day
@@ -101,16 +102,12 @@ def optimize_requests(requests):
 
         optimized_requests.extend(eng_blocks)  # Add all engineering blocks as is
         shadow_blocks = calculate_shadow_blocks(eng_blocks)
-        optimized_non_eng_blocks = fit_non_engineering_blocks(non_eng_blocks, shadow_blocks)
+        optimized_non_eng_blocks, remaining = fit_non_engineering_blocks(non_eng_blocks, shadow_blocks)
 
         optimized_requests.extend(optimized_non_eng_blocks)
+        remaining_non_eng_blocks.extend(remaining)
 
-        # For now, if not fitting, add to remaining non-eng blocks
-        for block in non_eng_blocks:
-            if block not in optimized_non_eng_blocks:
-                remaining_non_eng_blocks.append(block)
-
-    # Process remaining non-engineering blocks for corridor blocks if needed (for simplicity, not implemented here)
+    # Process remaining non-engineering blocks for corridor blocks if needed
     optimized_requests.extend(remaining_non_eng_blocks)
 
     return optimized_requests
