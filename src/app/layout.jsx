@@ -20,18 +20,10 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
 
     <html lang="en">
-      <body className={`${inter.className} w-full h-screen grid grid-cols-10 gap-6 mt-4 px-6 overflow-hidden`}>
-      <div className="absolute right-20 top-12">
-      <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-        </div>
-      <SidebarMenu />
-      {/* <div className="w-[20%]"></div> */}
-      <main className="col-span-8 h-full overflow-y-scroll hide-scrollbar">{children}</main>
+      <body className={`${inter.className} `}>
+
+        {children}
+
       </body>
     </html>
     </ClerkProvider>

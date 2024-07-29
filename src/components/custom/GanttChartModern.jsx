@@ -7,7 +7,7 @@ const GanttChartBar = ({ startHour, endHour, color, tooltip, clashed }) => {
   const calculatePosition = (time) => {
     const [hours, minutes] = time.split(':').map(Number);
     const totalMinutes = hours * 60 + minutes;
-    return (totalMinutes / (24 * 60)) * 100;
+    return (totalMinutes / (8 * 60)) * 100;
   };
 
   const left = calculatePosition(startHour);
@@ -18,7 +18,7 @@ const GanttChartBar = ({ startHour, endHour, color, tooltip, clashed }) => {
 
   return (
     <div 
-      className={`absolute h-full ${barColor} rounded-lg`} 
+      className={`absolute h-full ${barColor} rounded-lg  `} 
       style={{ left: `${left}%`, width: `${width}%` }}
     >
       <TooltipProvider>
@@ -37,11 +37,11 @@ const GanttChartBar = ({ startHour, endHour, color, tooltip, clashed }) => {
 
 const GanttChartGrid = () => (
   <>
-    {[...Array(25)].map((_, i) => (
+    {[...Array(9)].map((_, i) => (
       <div
         key={i}
         className="absolute inset-y-0 w-px bg-muted-foreground/20"
-        style={{ left: `${(i / 24) * 100}%` }}
+        style={{ left: `${(i / 8) * 100}%` }}
       />
     ))}
   </>
@@ -49,7 +49,7 @@ const GanttChartGrid = () => (
 
 const TimeLabels = () => (
   <div className="flex justify-between text-xs text-muted-foreground mt-1">
-    {[...Array(25)].map((_, i) => (
+    {[...Array(9)].map((_, i) => (
       <span key={i}>{`${String(i).padStart(2, '0')}:00`}</span>
     ))}
   </div>
@@ -72,28 +72,39 @@ const StationGantt = ({ station }) => {
   const nonClashingRequests = station.requests.filter(r => !r.clashed);
   const clashingRequests = station.requests.filter(r => r.clashed);
 
+  const handleClick = () => {
+    console.log('Non-Clashing Requests:', nonClashingRequests);
+    console.log('Clashing Requests:', clashingRequests);
+  };
+
+  
   return (
     <div className="space-y-2">
       <h3 className="text-sm font-semibold mb-1">{station.stationName}</h3>
-      <div className="relative h-8 bg-gray-200 rounded-lg">
-        {nonClashingRequests.map((request, index) => (
-          <GanttChartBar
-            key={index}
-            startHour={request.startHour}
-            endHour={request.endHour}
-            clashed={false}
-            tooltip={`${station.stationName} - Non-clashing Request ${index + 1}`}
-          />
-        ))}
+      {/* <button onClick={handleClick}>
+        sad
+      </button> */}
+      {nonClashingRequests.length > 0 && (
+          <div className="relative h-8 bg-gray-200 rounded-lg">
+            {nonClashingRequests.map((request, index) => (
+              <GanttChartBar
+                key={index}
+                startHour={request.startHour}
+                endHour={request.endHour}
+                clashed={false}
+                tooltip={`${station.stationName} - Non-clashing Request ${index + 1} - ${request.dept} - `}
+              />
+            ))}
         <GanttChartGrid />
-      </div>
+          </div>
+        )}
       {clashingRequests.map((request, index) => (
         <div key={index} className="relative h-8 bg-gray-200 rounded-lg">
           <GanttChartBar
             startHour={request.startHour}
             endHour={request.endHour}
             clashed={true}
-            tooltip={`${station.stationName} - Clashing Request ${index + 1}`}
+            tooltip={`${station.stationName} - Clashing Request ${index + 1} - ${request.dept} - `}
           />
           <GanttChartGrid />
         </div>

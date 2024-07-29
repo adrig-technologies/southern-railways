@@ -5,18 +5,16 @@ import { Check } from "lucide-react";
 import { GanttChartModern } from "../GanttChartModern";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import moment from "moment"
-import useFetchRequests from "@/lib/hooks/useFetchRequests";
+import useFetchOptimized from "@/lib/hooks/useFetchOptimized";
 
 
 
-
-
-
-const WeekSchedule = ({
-    isStationFetching,
-    setIsGanttView,
+const WeekScheduleOptimised = ({
+  isStationFetching,
+  setIsGanttView,
 }) => {
-    const { data, isLoading, error } = useFetchRequests();
+    const { data, isLoading, error } = useFetchOptimized();
+
   const [api, setApi] = useState(null);
   const [current, setCurrent] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -160,17 +158,15 @@ const WeekSchedule = ({
             setApi={setApi}
           >
             <CarouselContent className="ml-1">
-              {contentCarousel}
+            {contentCarousel}
+            
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
         </section>
-        
+              {contentChart}
 
-      {contentChart}
-
-        
       {/* {isStationFetching ? (
         <div className="w-full h-full flex items-center justify-center">
           <Loader />
@@ -241,4 +237,4 @@ const WeekSchedule = ({
   );
 };
 
-export default WeekSchedule;
+export default WeekScheduleOptimised;

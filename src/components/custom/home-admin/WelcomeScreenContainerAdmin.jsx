@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Lottie from "lottie-react";
 import { NoActivity } from "@/assets";
@@ -11,6 +11,9 @@ import {
   CalendarClock,
   ChevronRight,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import useRequestCheck from "@/lib/hooks/useRequestCheck";
+import useIsAdmin from "@/lib/hooks/useIsAdmin";
 
 const getFormattedDate = () => {
   const date = new Date();
@@ -149,7 +152,41 @@ const generateDummyData = () => {
 };
 
 const WelcomeScreenContainerUser = () => {
+
+  const { requestCheck, isFetching, error } = useRequestCheck();
+
   const data = generateDummyData();
+  const handleFileChange = async (event) => {
+    const selectedFile = event.target.files[0];
+
+    if (!selectedFile) {
+      alert('Please select a file to upload');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+      } else {
+        alert(result.error);
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Error uploading file');
+    }
+  };
+
+  const { isAdmin, isLoading } = useIsAdmin();
 
   const options = {
     title: "Requests Over Time",
@@ -184,28 +221,39 @@ const WelcomeScreenContainerUser = () => {
               Upload Bulk Request
             </h2>
             <p className="text-xs text-left w-full">
-              There are request to be optimised
+              There are request to be optimised 
             </p>
             <div className="w-full flex justify-between pt-2">
-              <Link
-                href="/block-request"
-                className="bg-white  text-sm text-center font-semibold px-6 py-2 flex items-center rounded-full  mr-2"
-              >
-                <Upload />{" "}
-                <span className=" ml-2 text-nowrap text-center ">Open</span>
-              </Link>
-            </div>
-          </div>
+      <input
+        type="file"
+        accept=".csv"
+        onChange={handleFileChange}
+        className="hidden"
+        id="fileUpload"
+      />
+      <label
+        htmlFor="fileUpload"
+        className="bg-white text-sm text-center font-semibold px-6 py-2 flex items-center rounded-full mr-2 cursor-pointer"
+      >
+        <Upload />
+        <span className="ml-2 text-nowrap text-center">Upload</span>
+      </label>
+    </div>
+    </div>
 
-          <div className="w-64 p-4 bg-primary rounded-xl text-textcolor shadow-md col-span-1 flex flex-col items-center justify-between space-y-2">
+          <div className={cn("w-64 p-4  rounded-xl text-textcolor shadow-md col-span-1 flex flex-col items-center justify-between space-y-2 bg-primary", !requestCheck && "bg-gray-300" )}>
             <h2 className="text-xl font-bold  w-full text-start">Requests</h2>
             <p className="text-xs text-left w-full">
               There are request to be optimised
             </p>
             <div className="w-full flex justify-between pt-2">
               <Link
-                href="/block-request"
-                className="bg-white  text-sm text-center font-semibold px-6 py-2 flex items-center rounded-full  mr-2"
+                href="/schedule-manager"
+                passHref
+                className={cn("bg-white  text-sm text-center font-semibold px-6 py-2 flex items-center rounded-full  mr-2",
+                  !requestCheck && "pointer-events-none  opacity-50"
+                )}
+                
               >
                 <MoveRight />{" "}
                 <span className=" ml-2 text-nowrap text-center ">Open</span>
