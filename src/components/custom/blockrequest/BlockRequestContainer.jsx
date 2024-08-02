@@ -56,7 +56,8 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
         } else {
           setMessage(res.data);
         }
-        setJsonvalue(JSON.stringify(res.data, null, 2));        toggleModal()
+        setJsonvalue(res.data);        
+        toggleModal()
 
       } catch (error) {
         setMessage("Error in client side posting: " + error);
@@ -143,7 +144,26 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
               {/* Modal body */}
               <div className="p-4 md:p-5 space-y-4">
                 <div className="text-base  text-gray-500">
-                  {jsonValue}
+                <div>
+            <h1 className='text-black text-xl'>Optimized Request</h1>
+            <div className='ml-5 my-2'> 
+            <div>Block Section Yard: {jsonValue?.optimized_request?.block_section_yard}</div>
+            <div>Date: {jsonValue?.optimized_request?.date}</div>
+            <div>Demanded Time From: {jsonValue?.optimized_request?.demanded_time_from}</div>
+            <div>Demanded Time To: {jsonValue?.optimized_request?.demanded_time_to}</div>
+            </div>
+            <hr/>
+            <h1 className='text-black text-xl mt-4'>Original Request</h1>
+            <div className='ml-5 mt-2'> 
+            {/* <div>Block Demanded In Hrs: {jsonValue?.original_request?.block_demanded_in_hrs}</div> */}
+            <div>Block Section Yard: {jsonValue?.original_request?.block_section_yard}</div>
+            <div>Date: {jsonValue?.original_request?.date}</div>
+            <div>Demanded Time From: {jsonValue?.original_request?.demanded_time_from}</div>
+            <div>Demanded Time To: {jsonValue?.original_request?.demanded_time_to}</div>
+            {/* <div>Dept: {jsonValue?.original_request?.dept}</div> */}
+            {/* <div>Line: {jsonValue?.original_request?.line}</div> */}
+            </div>
+        </div>
                 </div>
               </div>
               {/* Modal footer */}
