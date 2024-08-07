@@ -9,7 +9,7 @@ const useOptimizedCheck = () => {
     const fetchOptimizedCheck = async () => {
       try {
         setIsFetching(true);
-        const response = await fetch('http://127.0.0.1:5000/check_optimized_table');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/check_optimized_table`);
 
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);

@@ -9,7 +9,7 @@ const useRequestCheck = () => {
     const fetchRequestCheck = async () => {
       try {
         setIsFetching(true);
-        const response = await fetch('http://127.0.0.1:5000/check_request_table');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/check_request_table`);
 
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);

@@ -48,7 +48,7 @@ const BlockRequestContainer = ({ machinesData, sectionData, stationsData, slotDa
       console.log(formattedData);
 
       try {
-        const res = await axios.post("http://127.0.0.1:5000/add_request", formattedData);
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/add_request`, formattedData);
         if (res.data.success) {
           setMessage(res.data.msg);
           // toggleModal()
