@@ -8,7 +8,7 @@ const useFetchOptimized = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/read_optimized_requests');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/read_optimized_requests`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

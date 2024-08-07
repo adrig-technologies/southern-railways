@@ -31,7 +31,7 @@ const ToolBar = ({ setScheduleDataByStation }) => {
 
   const handleClick = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/optimize', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/optimize`, {
         method: 'GET',
       });
 
