@@ -153,7 +153,7 @@ const generateDummyData = () => {
 
 const WelcomeScreenContainerUser = () => {
 
-  const { requestCheck, isFetching, error } = useRequestCheck();
+  const { requestCheck, isFetching, error, fetchRequestCheck } = useRequestCheck();
 
   const data = generateDummyData();
   const handleFileChange = async (event) => {
@@ -177,9 +177,11 @@ const WelcomeScreenContainerUser = () => {
 
       if (response.ok) {
         alert(result.message);
+        //hit api again and check updated value of useFetchRequests
       } else {
         alert(result.error);
       }
+      // await fetchRequestCheck()
     } catch (error) {
       console.error('Error uploading file:', error);
       alert('Error uploading file');
@@ -227,7 +229,12 @@ const WelcomeScreenContainerUser = () => {
       <input
         type="file"
         accept=".csv"
-        onChange={handleFileChange}
+        onChange={async (event) => {
+          await handleFileChange(event); // First, handle the file upload
+          console.log("working after");
+
+          await fetchRequestCheck();     // Then, re-fetch the data
+        }}
         className="hidden"
         id="fileUpload"
       />
